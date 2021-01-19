@@ -9,4 +9,3 @@ def remove_char_at(str, n):
             s += c
         count += 1
     return s
-
