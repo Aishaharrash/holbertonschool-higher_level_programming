@@ -1,1 +1,1 @@
-getting introduced to the python data structures
+learn python data structures
