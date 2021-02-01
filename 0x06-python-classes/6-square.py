@@ -39,3 +39,33 @@ class Square:
         else:
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
+
+    @property
+    def size(self):
+        """set size value."""
+        return self.__size
+
+    @size.setter
+    def size(self, value):
+        """set size value."""
+        self.__size = value
+        if type(value) != int:
+            raise TypeError("size must be an integer")
+        if value < 0:
+            raise ValueError("size must be >= 0")
+
+    def area(self):
+        """return area."""
+        return self.__size * self.__size
+
+    def my_print(self):
+        if self.__size == 0:
+            print("")
+        else:
+            print("\n" * self.__position[1], end="")
+            for iter in range(0, self.__size):
+                for iter3 in range(0, self.__position[0]):
+                    print(" ", end="")
+                for iter2 in range(0, self.__size):
+                    print("#", end="")
+                print("")
