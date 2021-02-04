@@ -1,58 +1,60 @@
-The ``print_square`` module
-===========================
+======================
+The ``4-print_square`` module
+======================
 
 Using ``print_square``
-----------------------
+-------------------
 
-Import file
+This is a text file to test the 4-print_square module.  First import
+``4-print_square`` from the ``print_square`` module:
+
 >>> print_square = __import__('4-print_square').print_square
 
-Test print square of size 3
->>> print_square(3)
-###
-###
-###
+Now use it with:
 
-Test print square of size 1
+>>> print_square(4)
+####
+####
+####
+####
+
+>>> print_square(10)
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+
+>>> print_square(0)
+
 >>> print_square(1)
 #
 
-Test print square of size 0
->>> print_square(0)
-
-Test print square of size as string
->>> print_square("Holberton")
-Traceback (most recent call last):
-TypeError: size must be an integer
-
-Test print square of size as list
->>> print_square([1, 2, 3])
-Traceback (most recent call last):
-TypeError: size must be an integer
-
-Test print square of size as dictionary
->>> print_square({})
-Traceback (most recent call last):
-TypeError: size must be an integer
-
-Test print square of size as None
->>> print_square(None)
-Traceback (most recent call last):
-TypeError: size must be an integer
-
-Test print square of negative integer size
->>> print_square(-2)
+>>> print_square(-1)
 Traceback (most recent call last):
 ValueError: size must be >= 0
 
-Test print square of negative float size
->>> print_square(-3.2)
+>>> print_square("1")
 Traceback (most recent call last):
 TypeError: size must be an integer
 
-Test print square as positive float size
->>> print_square(3.2)
+>>> print_square(10.3)
 Traceback (most recent call last):
 TypeError: size must be an integer
 
-Test calling print_square without paramters
+>>> print_square(-10.3)
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> print_square()
+Traceback (most recent call last):
+TypeError: print_square() missing 1 required positional argument: 'size'
+
+>>> print_square(10e1000)
+Traceback (most recent call last):
+TypeError: size must be an integer
