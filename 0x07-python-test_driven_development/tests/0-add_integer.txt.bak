@@ -85,18 +85,3 @@ Test one integer and one list
 >>> add_integer(2, [1, 2, 3, 4, 5])
 Traceback (most recent call last):
 TypeError: b must be an integer
-
-Test missing arguments
->>> add_integer()
-Traceback (most recent call last):
-TypeError: add_integer() missing 1 required positional argument: 'a'
-
-Test one NaN and one default
->>> add_integer(float("NaN"))
-Traceback (most recent call last):
-ValueError: cannot convert float NaN to integer
-
-Test one positive infinite number and one integer
->>> add_integer(10e99999, 10)
-Traceback (most recent call last):
-OverflowError: cannot convert float infinity to integer
