@@ -1,8 +1,13 @@
 #!/usr/bin/python3
-"""append string to txt file"""
+
+"""
+append_write Module
+"""
 
 
 def append_write(filename="", text=""):
-    """ Append content to a file, it doesn´t exist then is created """
-    with open(filename, "a", encoding="utf-8") as writer:
-        return writer.write(text)
+    """Appends a string at the end of a text file, then returns the
+    number of characters appended"""
+    with open(filename, 'a') as f:
+        chars = f.write(text)
+    return chars
