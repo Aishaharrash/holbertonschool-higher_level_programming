@@ -1,11 +1,13 @@
 #!/usr/bin/python3
-"""fron jason to object"""
 
+"""
+load_from_json_file module
+"""
 
 import json
 
 
 def load_from_json_file(filename):
-    """function fom json to object"""
-    with open(filename, "r") as reader:
-        return json.load(reader)
+    """Creates an Object from a JSON file"""
+    with open(filename, 'r') as f:
+        return json.load(f)
