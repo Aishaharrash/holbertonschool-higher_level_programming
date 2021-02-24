@@ -1,7 +1,14 @@
 #!/usr/bin/python3
-
 """
-Base Module
+base.py
+Module that defines a class called Base and returns a public instance attribute
+called id
+Including Method that converts list to JSON string
+Including Method that writes a JSON string to a file
+Including Method that converts JSON string to list
+Including Method that returns a list of instances
+Including Method that encodes list to CSV file
+Including Method that decodes CSV file to list
 """
 
 import json
@@ -10,12 +17,16 @@ import os.path
 
 
 class Base:
-    """The Base class"""
+    """
+    Represents a class called Base with a public instance attribute
+    called id
+    """
 
+    # A private class attribute, counting the number of objects
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """Intialization of the class"""
+        """Initialization of the public instance attribute"""
         if id is not None:
             self.id = id
         else:
@@ -24,7 +35,17 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """Returning a JSON string of list_dictionaries"""
+        """
+        Function that return the JSON string representation of list
+        Args:
+            list_dictionaries (list): List of dictionaries
+        Note:
+            if list_dictionaries is None or empty, return empty list in string
+            if list_dictionaries is not a list, a TypeError exception is raised
+            if not all elements of list is not dictionary, a TypeError
+            exception is raised
+            Otherwise, Convert list_dictionaries to JSON string
+        """
         if list_dictionaries is None or list_dictionaries == []:
             return "[]"
         if type(list_dictionaries) != list:
@@ -35,7 +56,19 @@ class Base:
 
     @classmethod
     def save_to_file(cls, list_objs):
-        """Writing a JSON string of list_objs to a file"""
+        """
+        Function that writes the JSON string representation of a list of
+        objects to a file
+        Args:
+            list_objs (list): List of objects
+        Note:
+            if list_objs is not None or not a list, a TypeError exception is
+            raised
+            if list_objs is none or empty list, save empty list to file
+            if not all elements of list are matching, a ValueError exception is
+            raised
+            Otherwise, writes JSON string representation of list to a file
+        """
         if type(list_objs) != list and list_objs is not None:
             raise TypeError("list_objs must be a list")
         if list_objs is None or list_objs == []:
@@ -51,7 +84,18 @@ class Base:
 
     @staticmethod
     def from_json_string(json_string):
-        """Returning a list of the JSON strings"""
+        """
+        Function that returns the list of the JSON string representation
+        Args:
+            json_string (str): JSON string
+        Note:
+            if json_string is none or empty, return empty list
+            if json_string is not a string, a TypeError exception is raised
+            Otherwise, convert json_string to list
+            If converted list elements are not dictionary, a ValueError
+            exception is raised
+            Otherwise, returns converted list
+        """
         if json_string is None or json_string == "":
             return []
         if type(json_string) != str:
@@ -64,14 +108,19 @@ class Base:
 
     @classmethod
     def create(cls, **dictionary):
-        """Returning instance with set attributes"""
-        test_case = cls(1, 1) if cls.__name__ == "Rectangle" else cls(1)
-        test_case.update(**dictionary)
-        return test_case
+        """
+        Function that returns an instance with all attributes already set
+        """
+        if cls.__name__ == "Rectangle":
+            test = cls(1, 1)
+        else:
+            test = cls(1)
+        test.update(**dictionary)
+        return test
 
     @classmethod
     def load_from_file(cls):
-        """Returning list of instances"""
+        """Function that returns a list of instances"""
         filename = str(cls).split(".")[-1][:-2] + ".json"
         if not os.path.exists(filename):
             return []
@@ -84,7 +133,7 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """CSV Format"""
+        """Function that encodes a list to csv file"""
         if type(list_objs) != list and list_objs is not None \
                 or not all(isinstance(x, cls) for x in list_objs):
             raise TypeError("list_objs must be a list")
@@ -103,7 +152,7 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
-        """Deserializion in CSV file"""
+        """Function that decodes a csv file to a list"""
         filename = cls.__name__ + ".csv"
         rec_header = ["id", "width", "height", "x", "y"]
         squ_header = ["id", "size", "x", "y"]
@@ -112,11 +161,11 @@ class Base:
         if os.path.exists(filename):
             with open(filename, "r") as f:
                 reader = csv.reader(f, delimiter=',')
-                for x, row in enumerate(reader):
-                    if x > 0:
+                for i, row in enumerate(reader):
+                    if i > 0:
                         new = cls(1, 1)
-                        for y, z in enumerate(row):
-                            if z:
-                                setattr(new, header[y], int(z))
+                        for j, e in enumerate(row):
+                            if e:
+                                setattr(new, header[j], int(e))
                         res.append(new)
         return res
