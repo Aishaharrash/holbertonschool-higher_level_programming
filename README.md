@@ -1,1 +1,1 @@
-SQL introduction
+SQL more queries
